@@ -4,89 +4,171 @@ An end-to-end machine learning system to forecast invoice payment clearing timel
 
 ---
 
+## Live Demo
+
+🔗 https://invoicepaymentforecasting.streamlit.app
+
+---
+
 ## Overview
 
-This project predicts the number of days it takes for a customer to clear an invoice after it is posted. Built on 50,000+ real business invoice records, it covers the full ML pipeline — data cleaning, feature engineering, model training, evaluation, and deployment — across two Streamlit applications.
+This project predicts the number of days required for a customer to clear an invoice after it is posted.
+
+Built using **50,000+ real-world business invoice records**, the project demonstrates the complete machine learning workflow—from data preprocessing and feature engineering to model training, evaluation, and deployment.
+
+The repository contains two Streamlit applications:
+
+- **Training Dashboard** – explains the complete ML pipeline
+- **Prediction App** – performs real-time invoice payment prediction using a pre-trained model
 
 ---
 
 ## Project Structure
 
-```
+```text
 invoice_payment_forecasting/
 │
-├── train_model.py         # Pipeline dashboard (14-section walkthrough)
-├── app.py                 # Live invoice prediction app
-├── requirements.txt       # Python dependencies
+├── app.py                     # Live prediction application
+├── train_model.py             # End-to-end ML pipeline dashboard
+├── main.py                    # Initial EDA and preprocessing experiments
+│
+├── model.pkl                  # Trained Random Forest model
+├── encoders.pkl               # Label encoders
+├── feature_columns.pkl        # Feature ordering
+├── selected_features.pkl      # Features selected using RFE
+│
+├── requirements.txt
+├── README.md
 ├── .gitignore
-└── README.md
+│
+├── Usecase.pdf
+└── problem_statement.pdf
 ```
-
-> **Note:** `dataset.csv` and generated `.pkl` artifact files (`model.pkl`, `rfe.pkl`, `encoders.pkl`, `feature_columns.pkl`) are not included in this repository due to size and privacy constraints. See setup instructions below.
 
 ---
 
 ## Applications
 
-### 1. `train_model.py` — Pipeline Dashboard
-A 14-section interactive dashboard that walks through the entire ML pipeline:
-- Raw dataset exploration and EDA visualizations
-- Data cleaning and preprocessing steps
-- Date processing and feature engineering
-- Encoding and transformation
-- Train-test split and RFE feature selection
-- Model training and comparison (Random Forest, Gradient Boosting, XGBoost)
-- Final model summary and saved artifacts
+### 1. Training Dashboard (`train_model.py`)
 
-### 2. `app.py` — Live Prediction App
-A real-time inference interface where users input invoice details and receive:
-- Predicted number of days to payment clearance
-- Expected payment date
-- On-time vs. delayed payment status
-- Full feature breakdown sent to the model
+A comprehensive 14-section interactive dashboard demonstrating the entire machine learning pipeline:
+
+- Dataset exploration
+- Exploratory Data Analysis (EDA)
+- Data cleaning
+- Feature engineering
+- Date processing
+- Label Encoding
+- One-Hot Encoding
+- Train/Test split
+- Recursive Feature Elimination (RFE)
+- Model training
+- Hyperparameter configuration
+- Model comparison
+- Performance evaluation
+- Model artifact generation
 
 ---
 
-## ML Pipeline Summary
+### 2. Prediction Application (`app.py`)
+
+A production-style Streamlit application that loads the pre-trained model and predicts invoice payment timelines.
+
+Users can:
+
+- Select existing or enter new customer information
+- Enter invoice details
+- Predict invoice clearing time
+- Estimate payment date
+- Identify on-time or delayed payments
+
+The prediction app performs inference only and **does not retrain the model**, resulting in significantly faster startup.
+
+---
+
+## Machine Learning Pipeline
 
 | Stage | Details |
-|---|---|
-| Dataset | 50,000 invoice records, 19 raw features |
-| Cleaning | Removed duplicates, dropped 6 identifier columns, removed null rows |
-| Feature Engineering | 8 temporal features from date columns including due gap and calendar decomposition |
-| Encoding | Label encoding, frequency grouping, one-hot encoding |
-| Feature Selection | RFE with Random Forest base estimator → 15 features from 30+ |
+|--------|---------|
+| Dataset | 50,000 invoice records |
+| Initial Features | 19 raw features |
+| Data Cleaning | Duplicate removal, null handling, irrelevant column removal |
+| Feature Engineering | Calendar features, due gap, payment duration |
+| Encoding | Label Encoding, Frequency Encoding, One-Hot Encoding |
+| Feature Selection | Recursive Feature Elimination (15 selected features) |
 | Models Evaluated | Random Forest, Gradient Boosting, XGBoost |
-| Best Model | Random Forest Regressor |
-| Test R² | 0.656 |
-| Test RMSE | ~8 days |
+| Final Model | Random Forest Regressor |
+| Test R² Score | **0.656** |
+| Test RMSE | **~8 days** |
 
 ---
 
-## Setup Instructions
+## Saved Model Artifacts
 
-### 1. Clone the repository
+The training dashboard generates the following files:
+
+| File | Purpose |
+|------|----------|
+| model.pkl | Trained Random Forest model |
+| encoders.pkl | Label encoders for customer features |
+| feature_columns.pkl | Original feature ordering |
+| selected_features.pkl | Final 15 features selected using RFE |
+
+---
+
+## Setup
+
+### Clone the repository
+
 ```bash
-git clone https://github.com/<your-username>/invoice_payment_forecasting.git
+git clone https://github.com/dhruv-rathi-tech/invoice_payment_forecasting.git
 cd invoice_payment_forecasting
 ```
 
-### 2. Install dependencies
+---
+
+### Install dependencies
+
 ```bash
 pip install -r requirements.txt
 ```
 
-### 3. Add your dataset
-Place your `dataset.csv` file in the root of the project directory.
+---
 
-### 4. Run the pipeline dashboard
-This will train the models and generate the `.pkl` artifact files.
+### Add dataset
+
+Place
+
+```
+dataset.csv
+```
+
+inside the project root.
+
+---
+
+### Generate model artifacts
+
+Run
+
 ```bash
 streamlit run train_model.py
 ```
 
-### 5. Run the prediction app
-Only after step 4 has completed and `.pkl` files are generated.
+This will:
+
+- preprocess the dataset
+- engineer features
+- train all models
+- evaluate performance
+- generate the required `.pkl` files
+
+---
+
+### Launch the prediction app
+
+After the artifacts have been generated,
+
 ```bash
 streamlit run app.py
 ```
@@ -95,16 +177,32 @@ streamlit run app.py
 
 ## Tech Stack
 
-- **Python 3.10+**
-- **Pandas, NumPy** — data manipulation
-- **Scikit-learn** — preprocessing, RFE, Random Forest, Gradient Boosting
-- **XGBoost** — gradient boosting regressor
-- **Matplotlib, Seaborn** — visualizations
-- **Streamlit** — interactive web applications
-- **Joblib** — model serialization
+- Python
+- Pandas
+- NumPy
+- Scikit-learn
+- XGBoost
+- Matplotlib
+- Seaborn
+- Streamlit
+- Joblib
+
+---
+
+## Future Improvements
+
+- REST API using FastAPI
+- Docker deployment
+- Batch invoice prediction
+- Explainable AI (SHAP)
+- Database integration
+- Automated model retraining pipeline
 
 ---
 
 ## Author
 
-Dhruv — Electronics and Computer Engineering, VIT Chennai
+**Dhruv Rathi**
+
+B.Tech Electronics and Computer Engineering  
+VIT Chennai

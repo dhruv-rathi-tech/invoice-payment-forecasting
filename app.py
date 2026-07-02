@@ -18,7 +18,7 @@ def load_artifacts():
     feature_columns = joblib.load("feature_columns.pkl")
     selected_features = joblib.load("selected_features.pkl")
 
-return model, encoders, feature_columns, selected_features
+    return model, encoders, feature_columns, selected_features
 
 try:
     model, encoders, feature_columns, selected_features = load_artifacts()
