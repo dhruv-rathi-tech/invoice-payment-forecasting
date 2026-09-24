@@ -12,7 +12,7 @@ import joblib
 import warnings
 warnings.filterwarnings("ignore")
 
-st.set_page_config(page_title="Invoice Payment Prediction", layout="wide")
+st.set_page_config(page_title="PayCast – ML Pipeline Dashboard", page_icon="📊", layout="wide")
 
 # ─────────────────────────────────────────────
 # DATA LOADING (cached so it only runs once)
@@ -177,7 +177,7 @@ results           = data["results"]
 # ══════════════════════════════════════════════
 # SECTION 1 — PROJECT OVERVIEW
 # ══════════════════════════════════════════════
-st.title("Invoice Payment Prediction")
+st.title("PayCast – ML Pipeline & Training Dashboard")
 st.header("Section 1: Project Overview")
 
 st.write("""

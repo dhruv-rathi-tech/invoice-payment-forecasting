@@ -6,7 +6,7 @@ from datetime import date, timedelta
 import warnings
 warnings.filterwarnings("ignore")
 
-st.set_page_config(page_title="Invoice Payment Predictor", layout="centered")
+st.set_page_config(page_title="PayCast – Invoice Payment Predictor", page_icon="💳", layout="centered")
 
 # ─────────────────────────────────────────────
 # LOAD ARTIFACTS
@@ -25,7 +25,7 @@ try:
 except FileNotFoundError as e:
     st.error(
         f"Artifact file not found: {e}\n\n"
-        "Please run `streamlit_app.py` first to train the model and generate the .pkl files."
+        "Please run `train_model.py` first to train the model and generate the .pkl files."
     )
     st.stop()
 
@@ -135,7 +135,8 @@ def build_feature_row(
 # ─────────────────────────────────────────────
 # UI
 # ─────────────────────────────────────────────
-st.title("Invoice Payment Date Predictor")
+st.title("PayCast – Invoice Payment Date Predictor")
+st.caption("Enterprise Invoice Payment Forecasting")
 st.write(
     "Enter the invoice details below. The model will predict how many days "
     "it will take for the payment to clear, and calculate the expected payment date."

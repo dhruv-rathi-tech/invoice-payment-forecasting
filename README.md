@@ -1,6 +1,6 @@
-# Enterprise Invoice Payment Forecasting System
+# PayCast – Enterprise Invoice Payment Forecasting
 
-An end-to-end machine learning system to forecast invoice payment clearing timelines across large-scale financial transaction data.
+**PayCast** is an end-to-end machine learning system to forecast invoice payment clearing timelines across large-scale financial transaction data.
 
 ---
 
@@ -26,16 +26,11 @@ The repository contains two Streamlit applications:
 ## Project Structure
 
 ```text
-invoice_payment_forecasting/
+paycast/
 │
 ├── app.py                     # Live prediction application
 ├── train_model.py             # End-to-end ML pipeline dashboard
 ├── main.py                    # Initial EDA and preprocessing experiments
-│
-├── model.pkl                  # Trained Random Forest model
-├── encoders.pkl               # Label encoders
-├── feature_columns.pkl        # Feature ordering
-├── selected_features.pkl      # Features selected using RFE
 │
 ├── requirements.txt
 ├── README.md
@@ -121,8 +116,8 @@ The training dashboard generates the following files:
 ### Clone the repository
 
 ```bash
-git clone https://github.com/dhruv-rathi-tech/invoice_payment_forecasting.git
-cd invoice_payment_forecasting
+git clone https://github.com/dhruv-rathi-tech/invoice-payment-forecasting.git
+cd invoice-payment-forecasting
 ```
 
 ---
@@ -203,6 +198,3 @@ streamlit run app.py
 ## Author
 
 **Dhruv Rathi**
-
-B.Tech Electronics and Computer Engineering  
-VIT Chennai

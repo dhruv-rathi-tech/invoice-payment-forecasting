@@ -1,5 +1,6 @@
-# Dataset (too large / sensitive)
+# Dataset & Model Artifacts (too large / sensitive)
 dataset.csv
+*.pkl
 
 # Python
 __pycache__/
