@@ -108,7 +108,7 @@ The training dashboard generates the following files:
 | encoders.pkl | Label encoders for customer features |
 | feature_columns.pkl | Original feature ordering |
 | selected_features.pkl | Final 15 features selected using RFE |
-
+0
 ---
 
 ## Setup
